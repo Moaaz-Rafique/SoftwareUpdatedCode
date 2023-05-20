@@ -5,9 +5,11 @@ import remarkGfm from "remark-gfm";
 
 function AddNote() {
   const [markdownText, setMarkdownText] = useState("");
+  const [title, setTitle] = useState("New Note");
 
   return (
     <>
+     <input value={title} onChange={e=>setTitle(e.target.value)} /> 
       <textarea
         // type="textarea"
         style={{ width: "100%" }}
@@ -24,6 +26,12 @@ function AddNote() {
           {markdownText || "This is where your markdown will be rendered"}
         </ReactMarkdown>
       </div>
+      <button onClick={()=>{
+        console.log({
+          title,
+          markdownText,
+        })
+      }} >Save Note Notes</button>
     </>
   );
 }
