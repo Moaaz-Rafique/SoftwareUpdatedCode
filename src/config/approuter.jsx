@@ -10,22 +10,18 @@ import Posts from "../screens/Posts";
 import SignUp from "../screens/SignUp";
 import SinglePost from "../screens/SinglePost";
 import AdminDashboard from "../AdminDashboard";
+import AddNote from "../screens/AddNote";
 
 export default function AppRouter() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+        <Route path="/AddNote" element={<AddNote />} />
+        <Route path="/" element={<AddNote />} />
+          <Route path="/login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="admin/*" element={<AdminDashboard />} />
-          <Route path="institute/*" element={<InstituteDashboard />} />
           <Route path="dashboard/*" element={<Dashboard />} />
-          <Route path="about" element={<About />} />
-          <Route path="post" element={<Posts />} />
-          <Route path="singlepost/:id" element={<SinglePost />} />
-          <Route path="commentform" element={<CommentsForm />} />
-          <Route path="commentform:/id" element={<CommentsForm />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

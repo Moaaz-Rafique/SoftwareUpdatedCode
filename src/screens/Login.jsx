@@ -18,7 +18,7 @@ function SignUp(props) {
       .then((res) => {
         setLoader(false);
         console.log(res);
-        navigate("/institute");
+        navigate("/");
       })
       .catch((err) => {
         setLoader(false);
