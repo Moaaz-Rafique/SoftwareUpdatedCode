@@ -7,10 +7,11 @@ import {
 } from "firebase/auth";
 
 import { getDatabase, set, ref, onValue, push } from "firebase/database";
-import app from "../firebaseconfig/firebaseconfig";
+import app from "./firebaseconfig";
 
 const auth = getAuth(app);
 const db = getDatabase(app);
+
 
 let SignUpUser = (obj) => {
   console.log("obj", obj);
@@ -21,7 +22,7 @@ let SignUpUser = (obj) => {
         const reference = ref(db, `users/${obj.uid}`);
         set(reference, obj)
           .then(() => {
-            resolve("Data Sent Successfully anf User Created Succesfully ");
+            resolve("Data Sent Successfully anf User Created Successfully ");
           })
           .catch((err) => {
             reject(err.message);
@@ -76,7 +77,7 @@ let userLogOut = () => {
     });
 };
 
-let getFBData = (nodeName, id) => {
+let getNote = (nodeName, id) => {
   let reference = ref(db, `${nodeName}/${id ? id : ""}`);
   return new Promise((resolve, reject) => {
     onValue(reference, (dt) => {
@@ -92,7 +93,7 @@ let getFBData = (nodeName, id) => {
     });
   });
 };
-let postFBData = (nodeName, obj, id) => {
+let addNote = (nodeName, obj, id) => {
   return new Promise((resolve, reject) => {
     if (id) {
       let reference = ref(db, `${nodeName}/${id ? id : ""}/`);
@@ -107,21 +108,29 @@ let postFBData = (nodeName, obj, id) => {
       let keyRef = ref(db, `${nodeName}`);
       obj.id = push(keyRef).key;
       let postRef = ref(db, `${nodeName}/${obj.id}`);
-      set(postRef, obj);
+      set(postRef, obj)
+        .then((res) => {
+          resolve({...res, obj});
+        })
+        .catch((err) => {
+          reject(err);
+        });
     }
   });
 };
 
-let editFBData = () => {};
-let deleteFBData = () => {};
+let getAllNotes = () => {};
+
+let updateNote = () => {};
+let deleteNote = () => {};
 
 export {
   SignUpUser,
   LoginUser,
   userLogOut,
-  getFBData,
-  postFBData,
-  editFBData,
-  deleteFBData,
+  getNote,
+  addNote,
+  updateNote,
+  deleteNote,
   checkAuth,
 };

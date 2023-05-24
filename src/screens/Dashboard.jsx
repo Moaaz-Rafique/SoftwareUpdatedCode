@@ -1,10 +1,12 @@
 import React from "react";
-import MainLayout from "../components/MainLayout";
+import NavBar from "../components/NavBar";
+import NotesList from "../components/NotesList";
 
 function Dashboard() {
   return (
     <>
-      <MainLayout />
+      <NavBar />
+      <NotesList />
     </>
   );
 }

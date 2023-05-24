@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkAuth } from "./firbasemethods";
+import { checkAuth } from "./firebaseMethods";
 
 const ProtectedRoute = ({ Component }) => {
   const [loader, setLoader] = useState(false);

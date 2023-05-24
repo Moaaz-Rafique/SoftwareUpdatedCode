@@ -14,6 +14,7 @@ function SMButton(props) {
         disabled={loading || disabled}
       >
         {loading ? <CircularProgress /> : label}
+        {props.children}
       </Button>
     </>
   );

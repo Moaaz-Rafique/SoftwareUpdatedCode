@@ -9,10 +9,11 @@ import AddNote from "../screens/AddNote";
 export default function AppRouter() {
   return (
     <>
+      
       <BrowserRouter>
         <Routes>
-        <Route path="/AddNote" element={<AddNote />} />
-        <Route path="/" element={<AddNote />} />
+          <Route path="/AddNote" element={<AddNote />} />
+          <Route path="/" element={<AddNote />} />
           <Route path="/login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="dashboard/*" element={<Dashboard />} />
