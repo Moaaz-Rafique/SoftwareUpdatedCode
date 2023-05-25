@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import SMInput from "../components/SMInput";
 import SMButton from "../components/SMButton";
-
+import { Link } from "react-router-dom";
 import { SignUpUser } from "../config/firebaseconfig/firebaseMethods";
 import SMSelect from "../components/SMSelect";
 
@@ -85,6 +85,14 @@ function SignUp(props) {
         </Box>
         <Box>
           <SMButton label="SignUp" onClick={createUser} />
+        </Box>
+        <Box>
+          <Typography variant="p" textAlign={"start"}>
+            Already have Account  
+            <Link rel="stylesheet" to="/login">
+              Login
+            </Link>
+          </Typography>
         </Box>
       </Box>
     </>

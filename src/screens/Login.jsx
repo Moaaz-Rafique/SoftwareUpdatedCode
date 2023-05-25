@@ -72,7 +72,7 @@ function SignUp(props) {
         <Box>
           <Typography variant="p" textAlign={"start"}>
             No Account
-            <Link rel="stylesheet" to="signup">
+            <Link rel="stylesheet" to="/signup">
               SignUp
             </Link>
           </Typography>

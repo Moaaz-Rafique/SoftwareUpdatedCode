@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { addNote, checkAuth } from "../config/firebaseconfig/firebaseMethods";
 import SMButton from "../components/SMButton";
+import NavBar from "../components/NavBar";
 
 function AddNote() {
   const [markdownText, setMarkdownText] = useState("");
@@ -12,6 +13,10 @@ function AddNote() {
 
   return (
     <>
+    <div>
+    <NavBar/>
+
+    </div>
       <input value={title} onChange={(e) => setTitle(e.target.value)} />
       <textarea
         // type="textarea"

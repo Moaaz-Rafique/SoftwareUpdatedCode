@@ -22,7 +22,7 @@ let SignUpUser = (obj) => {
         const reference = ref(db, `users/${obj.uid}`);
         set(reference, obj)
           .then(() => {
-            resolve("Data Sent Successfully anf User Created Successfully ");
+            resolve("Data Sent Successfully and User Created Successfully ");
           })
           .catch((err) => {
             reject(err.message);
