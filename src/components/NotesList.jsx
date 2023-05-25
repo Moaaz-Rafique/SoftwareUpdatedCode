@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import firebase from "../config/firebaseconfig/firebaseconfig"; // Assuming you have the Firebase instance initialized
 import { getNote } from "../config/firebaseconfig/firebaseMethods";
-import { Box } from "@mui/system";
+import { Box, } from "@mui/system";
+import { Button, } from "@mui/material";
+
 
 const NotesList = () => {
   const [notes, setNotes] = useState([]);
@@ -23,6 +25,7 @@ const NotesList = () => {
     });
   }, []);
 
+
   return (
     <div>
       <h1>Notes List</h1>
@@ -38,7 +41,7 @@ const NotesList = () => {
          margin={"auto"}
          marginTop={3}
          padding={5}
-         maxWidth={400}
+         maxWidth={400}       
          sx={{
              boxShadow: "8px 8px 25px grey ",
              borderRadius: "25px",
@@ -47,6 +50,8 @@ const NotesList = () => {
      >
               <h3>{note.title}</h3>
               <p>{note.markdownText}</p>
+              <Button >delete</Button>
+              <Button>Update</Button>
         </Box>
           ))}
         </ul>
