@@ -43,8 +43,9 @@ const NotesList = () => {
          padding={5}
          maxWidth={400}       
          sx={{
-             boxShadow: "8px 8px 25px grey ",
-             borderRadius: "25px",
+            //  boxShadow: "3px 3px 5px grey ",
+             borderRadius: "10px",
+             border:'1px solid black'
          }}
          key={note.id}
      >
