@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 
-import { getDatabase, set, ref, onValue, push } from "firebase/database";
+import { getDatabase, set, ref, onValue, push,remove } from "firebase/database";
 import app from "./firebaseconfig";
 
 const auth = getAuth(app);
@@ -122,7 +122,15 @@ let addNote = (nodeName, obj, id) => {
 let getAllNotes = () => {};
 
 let updateNote = () => {};
-let deleteNote = () => {};
+let deleteNote = (id) => {
+
+  remove(ref(db, '/Notes/'+id ))
+  .then (()=>{
+    alert("Note successfully deleted!");
+}).catch(function(error) {
+    console.error("Error removing document: ", error);
+});
+};
 
 export {
   SignUpUser,

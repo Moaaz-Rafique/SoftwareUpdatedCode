@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import firebase from "../config/firebaseconfig/firebaseconfig"; // Assuming you have the Firebase instance initialized
-import { checkAuth, getNote } from "../config/firebaseconfig/firebaseMethods";
+import { checkAuth, getNote,deleteNote } from "../config/firebaseconfig/firebaseMethods";
 import { Box, } from "@mui/system";
 import { Button, } from "@mui/material";
 import SMButton from "./SMButton";
@@ -42,6 +42,7 @@ const NotesList = () => {
         <ul>
 
           {notes.map((note) => (
+            // console.log(note.id)
             <Box
               display={"flex"}
               flexDirection={"column"}
@@ -60,7 +61,8 @@ const NotesList = () => {
             >
               <h3 onClick={()=>navigator('/note/'+note.id)}  >{note.title}</h3>
               <p>{note.markdownText}</p>
-              <Button >delete</Button>
+              
+              <Button onClick={()=>deleteNote(note.id)} >delete</Button>
             </Box>
           ))}
         </ul>
