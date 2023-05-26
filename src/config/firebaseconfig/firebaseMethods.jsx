@@ -57,7 +57,7 @@ let checkAuth = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log("uid", uid);
+        // console.log("uid", uid);
         localStorage.setItem("userId", uid);
         resolve(uid);
       } else {
@@ -97,9 +97,9 @@ let addNote = (nodeName, obj, id) => {
   return new Promise((resolve, reject) => {
     if (id) {
       let reference = ref(db, `${nodeName}/${id ? id : ""}/`);
-      set(reference, obj)
+      set(reference, {...obj, id})
         .then((res) => {
-          resolve(res);
+          resolve({res, ...obj,id});
         })
         .catch((err) => {
           reject(err);

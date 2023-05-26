@@ -14,6 +14,7 @@ export default function AppRouter() {
       <BrowserRouter>
         <Routes>
           <Route path="/AddNote" element={<AddNote />} />
+          <Route path="/note/:noteId" element={<AddNote />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />

@@ -58,10 +58,9 @@ const NotesList = () => {
               }}
               key={note.id}
             >
-              <h3>{note.title}</h3>
+              <h3 onClick={()=>navigator('/note/'+note.id)}  >{note.title}</h3>
               <p>{note.markdownText}</p>
               <Button >delete</Button>
-              <Button>Update</Button>
             </Box>
           ))}
         </ul>
