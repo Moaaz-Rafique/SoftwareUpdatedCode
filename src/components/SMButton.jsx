@@ -11,6 +11,7 @@ function SMButton(props) {
         endIcon={endIcon}
         onClick={onClick}
         variant="contained"
+        style={props?.style}
         disabled={loading || disabled}
       >
         {loading ? <CircularProgress /> : label}

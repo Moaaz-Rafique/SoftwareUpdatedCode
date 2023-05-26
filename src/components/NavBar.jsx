@@ -18,7 +18,8 @@ const pages = [
   { text: "Home", route: "/" },
   { text: "Add Note", route: "/AddNote" },
 ];
-const settings = ["Profile Data", "Logout"];
+const settings = [{ text: "Profile Data", route: "/profile" },
+{ text: "Logout", route: "/login" }];
 
 function NavBar() {
   const navigate = useNavigate();
@@ -129,8 +130,8 @@ function NavBar() {
               <Button
                 key={page.text}
                 onClick={() => {
-                  handleCloseNavMenu()
                   navigate(page.route);
+                  handleCloseNavMenu()
                 }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -142,7 +143,7 @@ function NavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar/>
+                <Avatar />
               </IconButton>
             </Tooltip>
             <Menu
@@ -162,8 +163,11 @@ function NavBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.text} onClick={() => {
+                  handleCloseUserMenu();
+                  navigate(setting.route);
+                }}>
+                  <Typography textAlign="center">{setting.text}</Typography>
                 </MenuItem>
               ))}
             </Menu>

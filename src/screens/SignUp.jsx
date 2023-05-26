@@ -3,22 +3,31 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import SMInput from "../components/SMInput";
 import SMButton from "../components/SMButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SignUpUser } from "../config/firebaseconfig/firebaseMethods";
 import SMSelect from "../components/SMSelect";
 
 function SignUp(props) {
+  const navigate = useNavigate();
+
   const [model, setModel] = useState({});
 
   let createUser = () => {
     console.log(model);
-    SignUpUser(model)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (model?.fullName && model?.password && model?.email)
+      SignUpUser(model)
+        .then((res) => {
+
+          navigate('/');
+          console.log(res);
+        })
+        .catch((err) => {
+          alert("Signup failed: " + err)
+          // console.log(err);
+        });
+      else {
+        alert("Please fill all the feilds")
+      }
   };
 
   return (
@@ -48,14 +57,6 @@ function SignUp(props) {
             onChange={(e) => setModel({ ...model, fullName: e.target.value })}
           />
         </Box>
-
-        <Box margin={2}>
-          <SMInput
-            label="Password*"
-            type="password"
-            onChange={(e) => setModel({ ...model, password: e.target.value })}
-          />
-        </Box>
         <Box margin={2}>
           <SMInput
             label="Email*"
@@ -64,31 +65,19 @@ function SignUp(props) {
           />
         </Box>
         <Box margin={2}>
-          <SMSelect
-            dropDownHeading={"UserType"}
-            dropDownOptions={[
-              {
-                value: "1",
-                option: "Admin",
-              },
-              {
-                value: "2",
-                option: "Institute",
-              },
-              {
-                value: "3",
-                option: "Student",
-              },
-            ]}
-            onChange={(e) => setModel({ ...model, userType: e.target.value })}
+          <SMInput
+            label="Password*"
+            type="password"
+            onChange={(e) => setModel({ ...model, password: e.target.value })}
           />
         </Box>
+        
         <Box>
           <SMButton label="SignUp" onClick={createUser} />
         </Box>
         <Box>
           <Typography variant="p" textAlign={"start"}>
-            Already have Account  
+            Already have Account
             <Link rel="stylesheet" to="/login">
               Login
             </Link>

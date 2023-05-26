@@ -13,7 +13,7 @@
   }
 }
 
-.BtnHover{
+.BtnHover {
   display: 'none';
   background-color: #282c34;
   color: #61dafb;
@@ -38,7 +38,13 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.text-center {
+  text-align: center;
+  padding: 30px;
 }

@@ -5,12 +5,13 @@ import remarkGfm from "remark-gfm";
 import { addNote, checkAuth } from "../config/firebaseconfig/firebaseMethods";
 import SMButton from "../components/SMButton";
 import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 function AddNote() {
   const [markdownText, setMarkdownText] = useState("");
   const [title, setTitle] = useState("New Note");
   // const user = auth().currentUser;
-
+  const navigator = useNavigate()
   return (
     <>
     <div>
@@ -36,6 +37,11 @@ function AddNote() {
       </div>
       <SMButton
         onClick={() => {
+          if(!title || !markdownText){
+            alert("Please fill all the fields")
+
+            return
+          }
           const data = {
             title,
             markdownText,
@@ -47,8 +53,11 @@ function AddNote() {
             .then((res) => {
               uid = res;
               if (uid) {
-                addNote(`Notes/${uid || ""}`, data)
+                addNote(`Notes`, {...data, uid})
                   .then((res) => {
+                    alert("Added a new note successfully")
+                    setMarkdownText("")
+                    setTitle("New Note")
                     console.log("New note added successfully!", res);
                   })
                   .catch((error) => {
@@ -60,7 +69,9 @@ function AddNote() {
               }
             })
             .catch((e) => console.log(e));
-        }}
+        }
+      
+      }
       >
         Save Notes
       </SMButton>
