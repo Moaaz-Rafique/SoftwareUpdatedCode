@@ -16,21 +16,24 @@ const NotesList = () => {
 
   useEffect(() => {
     // Function to get notes from Firebase
-    const uid = getAuth()?.currentUser?.uid;
-
-    if (uid) {
-      getNote("Notes").then((notesData) => {
-        // console.log(JSON.stringify(notesData));
-        const notesArray = notesData.filter((v) => v.uid == uid)
-        // console.log('my notes data: ', notesArray);
-        setNotes(notesArray);
-        setLoading(false)
-      }).catch(res => alert(res))
-    }
-    else {
-      setLoading(false)
-      // alert("Sign-in to Add Notes")
-    }
+    checkAuth()
+      .then((res) => {
+        const uid = res?.uid || res;
+        if (getAuth().currentUser) {
+          getNote("Notes").then((notesData) => {
+            // console.log(JSON.stringify(notesData));
+            const notesArray = notesData.filter((v) => v.uid == uid)
+            // console.log('my notes data: ', notesArray);
+            setNotes(notesArray);
+            setLoading(false)
+          }).catch(res=>alert(res))
+        }
+        else {
+          setLoading(false)
+          // alert("Sign-in to Add Notes")
+        }
+      })
+      .catch((e) => console.log(e));
 
 
   }, []);
@@ -67,7 +70,10 @@ const NotesList = () => {
                 <h3 onClick={() => navigator('/note/' + note.id)}  >{note.title}</h3>
                 <p>{note.markdownText}</p>
 
-                <Button onClick={() => deleteNote(note.id)} >delete</Button>
+                <Button onClick={() => {
+                    deleteNote(note.id)
+                    navigator(0)
+                  }} >delete</Button>
               </Box>
             ))}
           </ul>
