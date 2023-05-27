@@ -43,7 +43,7 @@ function AddNote() {
         }
       })
       .catch((e) => console.log(e));
-  }, [])
+  }, [noteId])
   return (
     <>
       <div>
@@ -84,7 +84,8 @@ function AddNote() {
               return match ? (
                 <span
                   onClick={() => {
-                    navigator('/AddNote/' + noteId);
+                    console.log('clicked');
+                    navigator('/note/' + noteId);
                   }}
 
                   style={{ color: foundNote ? 'blue' : 'red' }}
