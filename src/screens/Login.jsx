@@ -1,10 +1,11 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SMInput from "../components/SMInput";
 import SMButton from "../components/SMButton";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginUser } from "../config/firebaseconfig/firebaseMethods";
+import { getAuth } from "firebase/auth";
 
 function SignUp(props) {
   const navigate = useNavigate();
@@ -25,7 +26,14 @@ function SignUp(props) {
         // console.log(err);
       });
   };
-
+  useEffect(()=>{
+    if(getAuth().currentUser){
+      navigate('/')
+    }
+    else {
+      console.log(getAuth().currentUser);
+    }
+  },[])
   return (
     <>
       <Box

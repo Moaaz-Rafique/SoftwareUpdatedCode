@@ -29,7 +29,7 @@ function SignUp(props) {
         alert("Please fill all the feilds")
       }
   };
-
+  
   return (
     <>
       <Box

@@ -148,7 +148,7 @@ function NavBar() {
               <IconButton onClick={(e) => {
                 if(!getAuth().currentUser){
                   // console.log(getAuth().currentUser)
-                  // navigate('/login')
+                  navigate('/login')
                   return
                 }
                 handleOpenUserMenu(e)
@@ -173,9 +173,12 @@ function NavBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.text} onClick={() => {
+                <MenuItem key={setting.text} onClick={async () => {
 
                   handleCloseUserMenu();
+                  if(getAuth().currentUser && setting.text == 'Logout'){
+                    await getAuth().signOut()
+                  }
                   navigate(setting.route);
                 }}>
                   <Typography textAlign="center">{setting.text}</Typography>

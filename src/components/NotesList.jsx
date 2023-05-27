@@ -16,31 +16,29 @@ const NotesList = () => {
 
   useEffect(() => {
     // Function to get notes from Firebase
-    checkAuth()
-      .then((res) => {
-        const uid = res?.uid || res;
-        if (uid) {
-          getNote("Notes").then((notesData) => {
-            // console.log(JSON.stringify(notesData));
-            const notesArray = notesData.filter((v) => v.uid == uid)
-            // console.log('my notes data: ', notesArray);
-            setNotes(notesArray);
-            setLoading(false)
-          });
-        }
-        else {
-          alert("Sign-in to Add Notes")
-        }
-      })
-      .catch((e) => console.log(e));
-    // Call the getNotes function to fetch notes
+    const uid = getAuth()?.currentUser?.uid;
+
+    if (uid) {
+      getNote("Notes").then((notesData) => {
+        // console.log(JSON.stringify(notesData));
+        const notesArray = notesData.filter((v) => v.uid == uid)
+        // console.log('my notes data: ', notesArray);
+        setNotes(notesArray);
+        setLoading(false)
+      }).catch(res => alert(res))
+    }
+    else {
+      setLoading(false)
+      // alert("Sign-in to Add Notes")
+    }
+
 
   }, []);
 
 
   return (
     <div>
-      <button onClick={() => console.log(getAuth().currentUser)} >get Auth</button>
+      {/* <button onClick={() => console.log(getAuth().currentUser)} >get Auth</button> */}
 
       <h1 className="text-center">Notes List</h1>
 
