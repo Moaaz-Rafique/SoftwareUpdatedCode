@@ -16,7 +16,7 @@ const NotesList = () => {
     // Function to get notes from Firebase
     checkAuth()
       .then((res) => {
-        const uid = res;
+        const uid = res?.id || res;
         if (uid) {
           getNote("Notes").then((notesData) => {
             console.log(JSON.stringify(notesData));

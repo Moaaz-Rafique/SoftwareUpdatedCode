@@ -10,6 +10,7 @@ function SMInput(props) {
     variant,
     type,
     fullWidth,
+    value,
     myClass,
   } = props;
   return (
@@ -22,6 +23,7 @@ function SMInput(props) {
         onChange={onChange}
         variant={variant}
         type={type}
+        {...props}
       />
     </>
   );

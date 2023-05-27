@@ -25,7 +25,7 @@ function AddNote() {
     }
     checkAuth()
       .then((res) => {
-        const uid = res;
+        const uid = res?.id || res;
         if (uid) {
           getNote("Notes").then((notesData) => {
             const notesArray = notesData.filter((v) => v.uid == uid)
@@ -121,15 +121,19 @@ function AddNote() {
           let uid = null;
           checkAuth()
             .then((res) => {
-              uid = res;
+              uid = res.id || res;
               if (uid) {
                 console.log("id", noteId)
                 addNote(`Notes`, { ...data, uid }, noteId)
                   .then((res) => {
-                    alert("Added a new note successfully")
-                    navigator('/note/'+(res?.obj?.id || res?.id || noteId ||''))
-                    console.log(res)
-                    console.log("New note added successfully!", res);
+                    if (noteId)
+                      alert("Updated note successfully")
+                    else
+                      alert("Added a new note successfully")
+
+                    // navigator('/note/' + (res?.obj?.id || res?.id || noteId || ''))
+                    // console.log(res)
+                    // console.log("New note added successfully!", res);
                   })
                   .catch((error) => {
                     console.error("Error adding new note:", error);
@@ -139,12 +143,15 @@ function AddNote() {
                 alert("Sign-in to Add Notes")
               }
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+              console.log(e)
+              alert("Sign-in to Add Notes")
+            });
         }
 
         }
       >
-        Save Note
+        {noteId ? 'Update Note' : 'Save Note'}
       </SMButton>
     </>
   );

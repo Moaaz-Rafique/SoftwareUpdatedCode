@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 const pages = [
   { text: "Home", route: "/" },
@@ -23,6 +24,8 @@ const settings = [{ text: "Profile Data", route: "/profile" },
 
 function NavBar() {
   const navigate = useNavigate();
+
+  const userData = getAuth()?.currentUser
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -142,7 +145,13 @@ function NavBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={(e) => {
+                if(!userData){
+                  navigate('/login')
+                  return
+                }
+                handleOpenUserMenu(e)
+              }} sx={{ p: 0 }}>
                 <Avatar />
               </IconButton>
             </Tooltip>
@@ -164,6 +173,7 @@ function NavBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting.text} onClick={() => {
+
                   handleCloseUserMenu();
                   navigate(setting.route);
                 }}>

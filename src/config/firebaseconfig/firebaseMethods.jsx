@@ -14,7 +14,7 @@ const db = getDatabase(app);
 
 
 let SignUpUser = (obj) => {
-  console.log("obj", obj);
+  // console.log("obj", obj);
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, obj.email, obj.password)
       .then((res) => {
@@ -57,9 +57,12 @@ let checkAuth = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        // console.log("uid", uid);
-        localStorage.setItem("userId", uid);
-        resolve(uid);
+        getNote("users", uid).then((res)=>{
+          // console.log(res)
+          resolve(res)
+          return
+        })
+        // resolve(uid);
       } else {
         reject("User Not Logged In");
       }

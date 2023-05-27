@@ -13,7 +13,7 @@ function SignUp(props) {
   const [model, setModel] = useState({});
 
   let createUser = () => {
-    console.log(model);
+    // console.log(model);
     if (model?.fullName && model?.password && model?.email)
       SignUpUser(model)
         .then((res) => {
