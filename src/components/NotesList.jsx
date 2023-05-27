@@ -19,9 +19,9 @@ const NotesList = () => {
         const uid = res?.id || res;
         if (uid) {
           getNote("Notes").then((notesData) => {
-            console.log(JSON.stringify(notesData));
+            // console.log(JSON.stringify(notesData));
             const notesArray = notesData.filter((v) => v.uid == uid)
-            console.log('my notes data: ', notesArray);
+            // console.log('my notes data: ', notesArray);
             setNotes(notesArray);
           });
         }

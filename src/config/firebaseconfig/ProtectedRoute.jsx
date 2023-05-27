@@ -10,12 +10,12 @@ const ProtectedRoute = ({ Component }) => {
     checkAuth()
       .then((uid) => {
         setLoader(false);
-        console.log("User Logged In");
+        // console.log("User Logged In");
         navigate("/dashboard");
       })
       .catch((err) => {
         setLoader(false);
-        console.log(err);
+        alert(err);
         navigate("/login");
       });
   }, []);

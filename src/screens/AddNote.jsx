@@ -57,7 +57,8 @@ function AddNote() {
         rows={10}
         value={markdownText}
         onChange={(e) => {
-          console.log();
+          console.log(e);
+          alert(e);
           setMarkdownText(e.target.value);
         }}
       />

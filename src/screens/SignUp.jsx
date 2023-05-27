@@ -19,7 +19,7 @@ function SignUp(props) {
         .then((res) => {
 
           navigate('/');
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           alert("Signup failed: " + err)

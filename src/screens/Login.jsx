@@ -13,16 +13,16 @@ function SignUp(props) {
 
   let signIn = () => {
     setLoader(true);
-    console.log("model", model);
+    // console.log("model", model);
     LoginUser(model)
       .then((res) => {
         setLoader(false);
-        console.log(res);
+        // console.log(res);
         navigate("/");
       })
       .catch((err) => {
         setLoader(false);
-        console.log(err);
+        // console.log(err);
       });
   };
 
