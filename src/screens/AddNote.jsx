@@ -25,7 +25,7 @@ function AddNote() {
     }
     checkAuth()
       .then((res) => {
-        const uid = res?.id || res;
+        const uid = res?.uid || res;
         if (uid) {
           getNote("Notes").then((notesData) => {
             const notesArray = notesData.filter((v) => v.uid == uid)
@@ -57,8 +57,8 @@ function AddNote() {
         rows={10}
         value={markdownText}
         onChange={(e) => {
-          console.log(e);
-          alert(e);
+          // console.log(e);
+          // alert(e);
           setMarkdownText(e.target.value);
         }}
       />
@@ -118,11 +118,11 @@ function AddNote() {
             markdownText,
           };
 
-          console.log(data);
+          // console.log(data);
           let uid = null;
           checkAuth()
             .then((res) => {
-              uid = res.id || res;
+              uid = res.uid || res;
               if (uid) {
                 console.log("id", noteId)
                 addNote(`Notes`, { ...data, uid }, noteId)

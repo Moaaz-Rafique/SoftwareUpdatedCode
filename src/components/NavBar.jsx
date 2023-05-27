@@ -25,7 +25,7 @@ const settings = [{ text: "Profile Data", route: "/profile" },
 function NavBar() {
   const navigate = useNavigate();
 
-  const userData = getAuth()?.currentUser
+  
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -146,8 +146,9 @@ function NavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={(e) => {
-                if(!userData){
-                  navigate('/login')
+                if(!getAuth().currentUser){
+                  // console.log(getAuth().currentUser)
+                  // navigate('/login')
                   return
                 }
                 handleOpenUserMenu(e)
