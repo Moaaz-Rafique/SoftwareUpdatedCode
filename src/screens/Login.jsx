@@ -24,6 +24,7 @@ function SignUp(props) {
       .catch((err) => {
         setLoader(false);
         // console.log(err);
+        alert(err)
       });
   };
   useEffect(()=>{
